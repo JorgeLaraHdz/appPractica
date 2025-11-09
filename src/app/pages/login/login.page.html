@@ -1,0 +1,39 @@
+<ion-content [fullscreen]="true">
+  <div class="login-container">
+    <ion-card>
+      <img alt="Silhouette of mountains"
+        src="https://1000marcas.net/wp-content/uploads/2024/02/Studio-Ghibli-Logo.jpg" />
+      <ion-card-header>
+        <ion-card-title style="text-align: center;">{{isLogin ? 'Login' : 'Register'}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-input 
+            label="Correo Electrónico" 
+            type="email" 
+            labelPlacement="floating" 
+            fill="solid"
+            placeholder="Dame tu correo" 
+            required>
+        </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input 
+            label="contraseña" 
+            type="password" 
+            labelPlacement="floating" 
+            fill="solid"
+            placeholder="Dame tu contraseña" 
+            required>
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+        </ion-item>
+        <ion-button expand="block" fill="clear" (click)="toggleForm()">
+          {{ isLogin ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión' }}
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
