@@ -5,3 +5,14 @@ import BackEnd.GlobalInfo.ResponseMessages as respuestas
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/getAllUsers',methods=["GET"])
+@cross_origin(allow_headers=['Content-Type'])
+def getUsers():
+    try:
+        objResult=CallMethod.fnGetAllUsers()
+        return objResult
+    except Exception as e:
+        print("No se pudo leer los usuarios")
+        return jsonify(respuestas.err500)
+app.run("0.0.0.0",3000)
