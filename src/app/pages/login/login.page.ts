@@ -56,7 +56,23 @@ export class LoginPage implements OnInit {
         }
       )}
     }else{
-
+      if(this.loginForm.valid){
+        const { email, password } = this.loginForm.value;
+        let data={
+          email: email.trim(),
+          password: password.trim()
+        }
+        this.authService.register(data).subscribe((res:any)=>{
+          if(res.intResponse==='200'){
+            this.mostrarAlerta('Registro Exitoso','','¡Cuenta creada correctamente!')
+          }else{
+            this.mostrarError('Error de Registro','','El correo ya está en uso.')
+          }
+        }, error=>{
+          this.mostrarError('Error de Registro','','Error en la conexión al servidor.')
+        }
+      )
+      }
     }
   }
 //Alertas

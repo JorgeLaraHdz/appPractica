@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { _URL_LOGIN } from '../config/config';
+import { _URL_LOGIN, _URL_REGISTRO } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +12,7 @@ export class Auth {
   public login(data:any): Observable<any> {
     return this.http.post(_URL_LOGIN, data);
   }
-  
+  public register(data:any):Observable<any> {
+    return this.http.post(_URL_REGISTRO, data);
+  }
 }

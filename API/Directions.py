@@ -28,4 +28,16 @@ def postLogin():
         print("No se pudo leer los usuarios")
         return jsonify(respuestas.err500)
 
+@app.route('/registro',methods=["POST"])
+@cross_origin(allow_headers=['Content-Type'])
+def postRegistro():
+    try:
+        email=request.json['email']
+        password=request.json['password']
+        objResult=CallMethod.fnPostRegistro(email, password)
+        return objResult
+    except Exception as e:
+        print("No se pudo leer los usuarios")
+        return jsonify(respuestas.err500)
+    
 app.run("0.0.0.0",3000)
