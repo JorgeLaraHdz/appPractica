@@ -31,3 +31,15 @@ def fnGetAllUsers():
         objResponse['Error'] = str(e)
         return jsonify(objResponse)
 
+def fnPostLogin(email,password):
+    try:
+        objQuery = dbUsers.find_one({"strCorreo":email,"strPassword":password})
+        if objQuery is None:
+            objResponse = respuestas.err401.copy()
+            return jsonify(objResponse)
+        objResponse = respuestas.succ200.copy()
+        return jsonify(objResponse)
+    except Exception as e:
+        objResponse = respuestas.err500.copy()
+        objResponse['Error'] = str(e)
+        return jsonify(objResponse)

@@ -15,4 +15,17 @@ def getUsers():
     except Exception as e:
         print("No se pudo leer los usuarios")
         return jsonify(respuestas.err500)
+
+@app.route('/login',methods=["POST"])
+@cross_origin(allow_headers=['Content-Type'])
+def postLogin():
+    try:
+        email=request.json['email']
+        password=request.json['password']
+        objResult=CallMethod.fnPostLogin(email, password)
+        return objResult
+    except Exception as e:
+        print("No se pudo leer los usuarios")
+        return jsonify(respuestas.err500)
+
 app.run("0.0.0.0",3000)
