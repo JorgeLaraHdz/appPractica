@@ -60,5 +60,33 @@ def deleteProduct(id):
         print("No se pudo eliminar el producto")
         return jsonify(respuestas.err500)
 
+@app.route('/putProducto',methods=["PUT"])
+@cross_origin(allow_headers=['Content-Type'])
+def putProduct():
+    try:
+        id=request.json['id']
+        nombre=request.json['nombre']
+        categoria=request.json['categoria']
+        precio=request.json['precio']
+        print(id,nombre,categoria,precio)
+        objResult=CallMethod.fnPutProduct(id,nombre,categoria,precio)
+        return objResult
+    except Exception as e:
+        print("No se pudo actualizar el producto")
+        return jsonify(respuestas.err500)
+
+@app.route('/newProduct',methods=["POST"])
+@cross_origin(allow_headers=['Content-Type'])
+def postProduct():
+    try:
+        nombre=request.json['nombre']
+        categoria=request.json['categoria']
+        precio=request.json['precio']
+        objResult=CallMethod.fnPostProducto(nombre,categoria,precio)
+        return objResult
+    except Exception as e:
+        print("No se pudo leer el producto")
+        return jsonify(respuestas.err500)
+
 if __name__ == '__main__':
-    app.run("0.0.0.0",3000)
+    app.run("0.0.0.0",3000, debug=True)

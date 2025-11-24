@@ -94,3 +94,29 @@ def fnDelProduct(id):
         objResponse = respuestas.err500.copy()
         objResponse['Error'] = str(e)
         return jsonify(objResponse)
+
+def fnPutProduct(id, nombre, categoria, precio):
+    try:
+        objQuery = dbProducts.update_one({"_id":ObjectId(id)},{"$set":{"nombre":nombre, "categoria":categoria, "precio":precio}})
+        if objQuery.matched_count==0:
+            objResponse = respuestas.err401.copy()
+            return jsonify(objResponse)
+        objResponse = respuestas.succ200.copy()
+        return jsonify(objResponse)
+    except Exception as e:
+        objResponse = respuestas.err500.copy()
+        objResponse['Error'] = str(e)
+        return jsonify(objResponse)
+
+def fnPostProducto(nombre, categoria, precio):
+    try:
+        objQuery = dbProducts.insert_one({"nombre":nombre, "categoria":categoria, "precio":precio})
+        if objQuery is None:
+            objResponse = respuestas.err401.copy()
+            return jsonify(objResponse)
+        objResponse = respuestas.succ200.copy()
+        return jsonify(objResponse)
+    except Exception as e:
+        objResponse = respuestas.err500.copy()
+        objResponse['Error'] = str(e)
+        return jsonify(objResponse)
