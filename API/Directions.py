@@ -39,5 +39,26 @@ def postRegistro():
     except Exception as e:
         print("No se pudo leer los usuarios")
         return jsonify(respuestas.err500)
-    
-app.run("0.0.0.0",3000)
+
+@app.route('/getProducts',methods=["GET"])
+@cross_origin(allow_headers=['Content-Type'])
+def getProducts():
+    try:
+        objResult=CallMethod.fnGetProducts()
+        return objResult
+    except Exception as e:
+        print("No se pudo leer los productos")
+        return jsonify(respuestas.err500)
+
+@app.route('/delProducto/<id>',methods=["DELETE"])
+@cross_origin(allow_headers=['Content-Type'])
+def deleteProduct(id):
+    try:
+        objResult=CallMethod.fnDelProduct(id)
+        return objResult
+    except Exception as e:
+        print("No se pudo eliminar el producto")
+        return jsonify(respuestas.err500)
+
+if __name__ == '__main__':
+    app.run("0.0.0.0",3000)
